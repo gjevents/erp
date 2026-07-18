@@ -277,6 +277,47 @@ document.addEventListener("contextmenu",
 e=>e.preventDefault());
 
 document.onselectstart=()=>false;
+let deferredPrompt;
+
+window.addEventListener("beforeinstallprompt",(e)=>{
+
+e.preventDefault();
+
+deferredPrompt=e;
+
+const install=document.createElement("button");
+
+install.innerHTML="📲 Install App";
+
+install.style.position="fixed";
+
+install.style.bottom="20px";
+
+install.style.right="20px";
+
+install.style.padding="15px";
+
+install.style.borderRadius="50px";
+
+install.style.background="#ff5a1f";
+
+install.style.color="white";
+
+install.style.border="none";
+
+install.style.cursor="pointer";
+
+document.body.appendChild(install);
+
+install.onclick=()=>{
+
+install.remove();
+
+deferredPrompt.prompt();
+
+};
+
+});
 
 // ======================
 // End
